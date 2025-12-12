@@ -74,3 +74,25 @@ fetch(API_URL)
           res3Pts.textContent = "Points can't be loaded :<";
         }
     });
+function updateCountdown() {
+    const futureDate = new Date('April 23, 2026 23:59:59');
+    const now = new Date();
+    let diff = futureDate - now;
+
+    if (diff < 0) {
+        document.getElementById('message').textContent = 'Challenge completed. Awarding: April 25, 2025.';
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    const minutes = Math.floor(diff / (1000 * 60));
+    diff -= minutes * (1000 * 60);
+    const seconds = Math.floor(diff / 1000);
+
+    document.getElementById('message').textContent = `${days} days | ${hours} hours | ${minutes} minutes | ${seconds.toString().padStart(2, '0')} seconds remaining to earn points!`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
